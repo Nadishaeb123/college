@@ -1,0 +1,87 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body{
+        background-image: url("{% static 'images/pic7.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 1000px;
+    }
+    table{
+        width: 100%;
+        text-align: center;
+        margin-top: 50px;
+    }
+    th{
+        height: 70px;
+        background-color: rgb(97, 97, 188);
+        border: 2px solid;
+    }
+    td{
+        border: 2px solid;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Details of Students</h1>
+        <table border="2px solid black">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Joining Date</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th colspan="2">Edit/Delete</th>
+
+
+            </tr>
+            
+            {% for p in stu %}
+           
+            <tr>
+                
+                <td>{{p.id}}</td>
+                <td> {{p.studentname}}</td>
+                
+                <td>{{p.address}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.joiningdate}}</td>
+            
+                
+                <td>{{p.course.coursename}}</td>
+                <td>{{p.course.fees}}</td>
+            
+                <td><Button>
+                    <a href="{% url 'stdedit' p.id %}">edit</a>
+                </Button></td>
+                <td><Button>
+                    <a href="{% url 'delete' p.id %}">Delete</a>
+                </Button></td>
+            </tr>
+            
+            {% endfor %}
+            
+            
+           
+            
+
+        </table>
+    </div>
+    
+{% endblock %}     
+</body>
+</html>

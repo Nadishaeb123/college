@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body{
+        background-image: url("{% static 'images/pic5.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 1000px;
+    }
+    .container{
+        background-color: rgb(204, 233, 233);
+        width: 300px;
+        margin-top: 200px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+       
+    }
+</style>
+<body>
+    <div class="container" style="text-align: center;">
+        <h1 style="margin-bottom: 50px;">Login</h1>
+        <form action="{% url 'loginfnc' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="usname">Username</label>
+                <input  type="text" id="usname" name="usname" required>
+            </div>
+            <div class="form-group">
+                <label for="pass">password</label>
+                <input type="password" id="pass" name="passd" required>
+
+            </div>
+            
+                <button class="btn btn-success" type="submit">Login</button>
+            
+            
+        </form>
+        <p>{% for msg in messages %}
+            <h6>
+              <div class="alert alert-danger mt-3" >
+                {{ msg }}
+              </div>
+            </h6>
+            {% endfor %}
+           
+          <p>Do you have an account? <a href="">Sign Up</a></p>
+    </div>
+    
+</body>
+</html>

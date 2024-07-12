@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <form action="{% url 'editdetails' stu.id %}" method="post">
+        {% csrf_token %}
+        <div class="container" style="text-align: center;">
+            <h1 style="text-align: center;">Edit details</h1>
+            <div class="form-group">
+                <label for="name">Name</label> 
+                <input type="text" id="name"  name="name" value="{{stu.studentname}}" required>
+            </div>
+            <div class="form-group">
+                <label for="add">Address</label>
+                <textarea name="add" id="add" cols="30" rows="10" value=""  required>{{stu.address}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="{{stu.age}}"  required>
+            </div>
+            <div class="form-group">
+                <label for="doj">Date of join</label>
+                <input type="date" id="doj"  name="doj" value="{{stu.joiningdate|date:'Y-m-d'}}"  required>
+            </div>
+           
+            
+            <div class="form-group">
+                <label for="cou">Course</label>
+                <select id="cou" name="coursename" placeholder="select course" required>
+                    
+                    {% for c in crs %}
+                    {% if c.id == stu.course.id %}
+                    <option value="{{c.id}}" selected>
+                    {{c.coursename}}
+                    </option>
+                    {% else %}
+                    <option value="{{c.id}}">
+                        {{c.coursename}}
+
+                    </option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+
+            </div>
+           
+            
+            <button type="submit" class="btn btn-primary ">Submit</button>
+
+
+        </div>
+    </form>
+    
+    
+</body>
+</html>

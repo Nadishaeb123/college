@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body{
+        background-image: url("{% static 'images/pic2.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 1000px;
+    }
+    .container{
+        width: 500px;
+        height: fit-content;
+        background-color:rgb(204, 233, 233);
+    }
+    label{
+        font-size: 15px;
+        margin-left: 20px;
+    }
+    input[type=text]{
+        margin-left: 50px;
+        padding: 2px;
+        width: 150px;
+    }
+    #add{
+        margin-left: 60px;
+    }
+   
+</style>
+<body>
+    <div class="container" >
+        <h4 style="text-align: center; margin-bottom: 20px;">Teacher Sign Up</h4>
+        <form action="{% url 'user_sign' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="fn">First Name</label>
+                <input type="text" id="fn" name="fname"  required>
+            </div>
+            <div class="form-group">
+                <label for="ln">Last Name</label>
+                <input type="text" id="ln" name="lname" required>
+            </div>
+            <div class="form-group">
+                <label for="un">Username</label>
+                <input type="text" id="un" name="uname" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="add">Address</label>
+                <textarea name="add" id="add" cols="30" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" style="margin-left: 90px;" required>
+            </div>
+            <div class="form-group">
+                <label for="em">Email</label>
+                <input type="text" id="em" name="email" style="margin-left: 80px;" required>
+            </div>
+            <div class="form-group">
+                <label for="pn">Phone Number</label>
+                <input type="number" id="pn" name="pn" style="margin-left: 15px;" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pswd">Password</label>
+                <input type="text" id="pswd" name="pass" style="margin-left: 55px;" required>
+            </div>
+            <div class="form-group">
+                <label for="cp">Confirm Password</label>
+                <input type="text" id="cp" name="cnpass" style="margin-left: 1px;" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" id="image"  name="img" accept="image/" style="margin-left: 80px;" required>
+            </div>
+            <div class="form-group">
+                <label for="co">Course</label>
+                <select class="drop" name="c" placeholder="course" style="height: 30px; width: 200px; border-radius: 5px; border-color: transparent; margin-left: 70px;">
+                    {% for c in crse %}
+                    <option value="{{c.id}}">
+                      {{c.coursename}}
+                    </option>
+                    {% endfor %}
+            
+                  </select>
+
+            </div>
+            <button class="btn btn-success" style="margin-left: 150px;">Sign up</button>
+        </form>
+        <p>{% for msg in messages %}
+            <h6>
+              <div class="alert alert-danger mt-3" >
+                {{ msg }}
+              </div>
+            </h6>
+            {% endfor %}
+           
+          <p style="text-align: center;">Already have an account? <a href="">Login</a></p>
+    </div>
+    
+</body>
+</html>

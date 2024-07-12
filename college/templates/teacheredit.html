@@ -1,0 +1,100 @@
+{% extends 'tnavbar.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body{
+        background-image: url("{% static 'images/pic6.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 1000px;
+    }
+    .container{
+        width: 500px;
+        height: fit-content;
+        background-color:rgb(204, 233, 233);
+        margin-top: 20px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    label{
+        margin-left: 50px;
+    }
+    input{
+        width: 200px;
+    }
+</style>
+<body>
+    <form action="{% url 'tchr_edit' tea.user.id %}" method="post">
+        {% csrf_token %}
+        <div class="container" >
+            <h4 style="text-align: center;">Teacher Update</h4>
+            <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="text" id="name"  name="fname" value="{{tea.user.first_name}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" id="name"  name="lname" value="{{tea.user.last_name}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" id="name"  name="uname" value="{{tea.user.username}}" required>
+            </div>
+            <div class="form-group">
+                <label for="add">Address</label>
+                <textarea name="add" id="add" cols="24" rows="2" value="" style="margin-left: 18px;"  required>{{tea.address}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="{{tea.age}}" style="margin-left: 45px;"  required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email"  name="mail" value="{{tea.user.email}}" style="margin-left: 40px;" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pn">Phone No:</label>
+                <input type="number" id="pn"  name="phone" value="{{tea.phone}}"  required>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="qual">Course</label>
+                <select class="signup-input" name="c" style="height: 40px; width: 200px; border-radius: 5px; border-color: transparent; margin-left: 25px;">
+                    {% for c in csr %}
+                    {% if c.id == tea.course.id %}
+                    <option value="{{c.id}}" selected>
+                      {{c.coursename}}
+                    </option>
+                    {% else %}
+                    <option value="{{c.id}}">
+                        {{c.coursename}}
+            
+                    </option>
+                    {% endif %}
+                    {% endfor %}
+            
+                </select>
+
+            </div>
+            
+            <button type="submit" class="btn btn-primary " style="margin-left: 150px;">Update</button>
+
+
+        </div>
+    </form>
+{% endblock %}
+    
+</body>
+</html>

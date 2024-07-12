@@ -1,0 +1,83 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .container{
+        background-color:rgb(204, 233, 233);
+        width: 350px;
+        height: fit-content;
+        margin-top: 100px;
+        padding-top: 10px;
+    }
+    label{
+        margin-left: 20px;
+    }
+    input{
+        width: 150px;
+    }
+    body{
+        
+        background-image: url("{% static 'images/pic4.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 1000px;
+    }
+    
+</style>
+<body>
+    <form action="{% url 'addstd_details' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <h4 style="text-align: center;">Add Student</h4>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" style="margin-left: 50px;" required>
+            </div>
+            <div class="form-group">
+                <label for="add">Address</label>
+                <textarea name="address" id="add" cols="17" rows="2" style="margin-left: 35px;" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" style="margin-left: 65px;" required>
+            </div>
+            <div class="form-group">
+                <label for="doj">Date of join</label>
+                <input type="date" id="doj" name="date" style="margin-left: 10px;" required>
+            </div>
+            <div class="form-group">
+                <label for="c">Course</label>
+                <select class="drop" name="c" placeholder="course" style="height: 30px; width: 150px; border-radius: 5px; border-color: transparent; margin-left: 40px;">
+                    {% for c in crs %}
+                    <option value="{{c.id}}">
+                      {{c.coursename}}
+                    </option>
+                    {% endfor %}
+            
+                </select>
+
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-left: 100px; margin-bottom: 10px;">Sign Up</button>
+
+
+
+           
+            
+
+
+        </div>
+          
+    </form>
+{% endblock %}     
+</body>
+</html>
